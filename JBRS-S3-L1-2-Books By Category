@@ -1,0 +1,34 @@
+Write a program to get the input as String and pass as input to switch case to display the Books with respect to category also display "No Books Available" when the category not found.
+
+
+// Class name should be "Source",
+// otherwise solution won't be accepted
+public class Source {
+  static String[] academics= {"Head First Java","Reinforcement Learning","The Road to React"};
+	static String[] biography= {"My Experiment with Truth","Wings of Fire","The Audacity of Hope","Total Recall"};
+	static String[] general= {"Think And Grow Rich","Awaken The Giant Within","Peace is Power"};
+	
+
+	public static void main(String args[] ) throws Exception 
+	{
+	    Scanner sc = new Scanner(System.in);
+        String book_type = sc.nextLine(); 
+		switch (book_type) {
+  case "Academics" :
+      for(String category: academics)
+    System.out.println(category);
+    break;
+  case "BIOgraphy":                                           //notice this
+      for(String category: biography)
+    System.out.println(category);
+    break;
+  case "general":
+      for(String category: general)
+    System.out.println(category);
+    break;
+  default:
+    System.out.println("No Books Available");
+    break;
+}
+	}
+}
