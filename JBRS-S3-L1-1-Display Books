@@ -1,5 +1,5 @@
 problem statement--->
-Create a program to accept the five Book name in an array and display the Book in an ascending order:
+Create a program to accept the five Book name in an array and display the Book in an alphabetical order:
 
 code:
 import java.io.*;
