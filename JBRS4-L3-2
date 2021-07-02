@@ -1,0 +1,217 @@
+JBRS4-L3-2 AdminService Interface -Class
+
+Description
+
+    Create Book class as per the given structure with Constructor , setter and getter methods for all the fields.
+    Create the Interface as AdminService and include methods for CRUD operation
+    Create the class AdminServiceImpl and implement the AdminSerivce Interface.
+    AdminServiceImpl Class should have a static variable bookArray with the Size of 5 when CRUD operation is performed the array should be updated for all the operations.
+    throw BookNotFoundException for update,delete,search methods when the customer details is not available in the book array.
+    BookNotFoundException should extend RuntimeException class
+
+Method Signatures
+    void createBook(Book book);
+	Book updateBook(Book book);
+	void deleteBook(int id);
+	Book searchBook(int id);
+	Book[] getBooks();
+
+.....................................................................
+code:
+class BookNotFoundException extends RuntimeException 
+{
+	BookNotFoundException()
+	{
+		super();
+	}
+}
+
+class Book
+{
+	private int bookId;
+	private String title;
+	private String description;
+	private String author;
+	private int availableQuantity;
+	private int totalQuantity;
+	private double price;
+	private double rentPerDay;
+	
+	
+	
+	public Book() 
+	{
+	
+	}
+
+	public Book( int bookId,
+	 String title,
+	 String description,
+	 String author,
+	 int availableQuantity,
+	 int totalQuantity,
+	 double price,
+	 double rentPerDay) 
+	{
+		this.bookId = bookId;
+		this.title = title;
+		this.description = description;
+		this.author = author;
+		this.availableQuantity = availableQuantity;
+		this.totalQuantity = totalQuantity;
+		this.price = price;
+		this.rentPerDay = rentPerDay;
+		
+	}
+
+	//getters 
+	public int getbookId() 
+	{
+		return bookId;
+	}
+
+	public String gettitle() 
+	{
+		return title;
+	}
+
+	public String getdescription()
+	{
+		return description;
+	}
+
+	public String getauthor()
+	{
+		return author;
+	}
+
+	public int getavailableQuantity() 
+	{
+		return availableQuantity;
+	}
+
+	public int gettotalQuantity() 
+	{
+		return totalQuantity;
+	}
+	
+	public double getrentPerDay() 
+	{
+		return rentPerDay;
+	}
+
+    public double getPrice() 
+	{
+		return price;
+	}
+// setters
+
+	public void setBookId(int bookId)
+	{
+		this.bookId = bookId;
+	}
+
+	public void setavailableQuantity(int availableQuantity) 
+	{
+		this.availableQuantity = availableQuantity;
+	}
+
+	public void settitle(String title) 
+	{
+		this.title = title;
+	}
+
+	public void setauthor(String author) 
+	{
+		this.author =author;
+	}
+
+	public void setdescription(String description) 
+	{
+		this.description = description;
+	}
+
+	public void setPrice(double price) 
+	{
+		this.price = price;
+	}
+	
+		public void setrentPerDay(double rentPerDay) 
+	{
+		this.rentPerDay = rentPerDay;
+	}
+	
+	public void settotalQuantity(int totalQuantity) 
+	{
+		this.totalQuantity = totalQuantity;
+	}
+
+}
+
+interface AdminService
+{
+	void createBook(Book book);
+	Book updateBook(Book book);
+	void deleteBook(int id);
+	Book searchBook(int id);
+	Book[] getBooks();
+}
+
+class AdminServiceImpl implements AdminService
+{
+	public static Book bookArray[] = new Book[5];
+	public static int count = 0;
+
+	
+	public void createBook(Book book)
+	{
+		bookArray[count++] = book;
+	}
+
+	
+	public Book updateBook(Book book) throws BookNotFoundException
+	{
+		for(int i=0; i<5; i++)
+		{
+			if(book.getbookId() == bookArray[i].getbookId())
+			{
+				bookArray[i] = book;
+				return bookArray[i];
+			}
+		}
+		throw new BookNotFoundException();
+	}
+
+	
+	public void deleteBook(int id) throws BookNotFoundException
+	{
+		for(int i=0; i<5; i++)
+		{
+			if(id == bookArray[i].getbookId())
+			{
+				bookArray[i] = null;
+				break;
+			}
+		}
+		throw new BookNotFoundException();
+	}
+
+	
+	public Book searchBook(int id) throws BookNotFoundException
+	{
+		for(int i=0; i<5; i++)
+		{
+			if(id == bookArray[i].getbookId())
+			{
+				return bookArray[i];
+			}
+		}
+		throw new BookNotFoundException();
+	}
+
+	
+	public Book[] getBooks()
+	{
+		return bookArray;
+	}
+}
